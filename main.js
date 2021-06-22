@@ -7,9 +7,12 @@ leftWristY = 0;
 rightWristX = 0;
 rightWristY = 0;
 
+scoreLeftWrist = 0;
+
+
 function preload(){
-    song1 = loadSound("Sorry By Alan Walker.mp3");
-    song2 = loadSound("Dance Monkey By Tones and I.mp3");
+    song1 = loadSound("Sorry_By_Alan_Walker.mp3");
+    song1 = loadSound("Tones-and-I-Dance-Monkey.mp3");
 }
 
 function setup(){
@@ -32,6 +35,8 @@ function gotPoses(results){
         leftWristX = results[0].pose.leftWrist.x;
         leftWristY = results[0].pose.leftWrist.y;
 
+        scoreLeftWrist = results[0].pose.keypoints[9].score;
+
         rightWristX = results[0].pose.rightWrist.x;
         rightWristY = results[0].pose.rightWrist.y;
 
@@ -40,4 +45,9 @@ function gotPoses(results){
 
 function draw(){
     image(Video,20,100,320,230);
+
+    stroke('orange');
+    if(scoreLeftWrist > 0.2){
+        circle(leftWristX,leftWristY,20);
+    }
 }
